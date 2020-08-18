@@ -1,0 +1,25 @@
+{
+  "name": "node-goals",
+  "version": "1.0.0",
+  "description": "A goals app that is completed together.",
+  "main": "app.js",
+  "scripts": {
+    "build:css": "postcss public/stylesheets/tailwind.css -o public/stylesheets/style.css",
+    "start": "npm run build:css && nodemon app",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "mongodb": "^3.6.0",
+    "monk": "^7.3.1",
+    "tailwindcss": "^1.6.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
