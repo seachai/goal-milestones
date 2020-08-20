@@ -1,23 +1,24 @@
-const db = require("../app.database");
-
 class Todo {
-  constructor(data) {
-    this.data = data;
-    this.errors = [];
+  constructor(db) {
+    this.collection = db;
   }
 
   /**
    * Get data from database collection
    */
-  getGoal() {
-    console.log(db.goals);
+  getGoals() {
+    const goalCollection = this.collection;
+    console.log(goalCollection);
   }
 
   /**
    * Post data to database collection
    */
-  postGoal() {
-    console.log("Posted");
+  async postGoal(postReq) {
+    await console.log(postReq);
+    // let newGoal = await this.collection.insertOne(postReq);
+    // console.log(`INSERTED ${postReq} into ${this.collection} successfully.`);
+    // return newGoal;
   }
 
   /**
@@ -35,4 +36,4 @@ class Todo {
   }
 }
 
-module.exports = new Todo();
+module.exports = Todo;
