@@ -1,10 +1,11 @@
 const Todo = require("../model/Todo.model");
+const mongoDB = require("../app.database");
 
 /**
  * Get data from Todo model
  */
 exports.getGoals = (req, res) => {
-  const todo = new Todo();
+  const todo = new Todo(mongoDB.db);
   console.log(todo.getGoals());
   res.render("index");
 };

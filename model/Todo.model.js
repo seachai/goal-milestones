@@ -8,7 +8,7 @@ class Todo {
    */
   getGoals() {
     const goalCollection = this.collection;
-    console.log(goalCollection);
+    return goalCollection;
   }
 
   /**
