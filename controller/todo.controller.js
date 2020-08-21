@@ -1,22 +1,35 @@
 const Todo = require("../model/Todo.model");
-const mongoDB = require("../app.database");
+// const mongoDB = require("../app.database");
 
 /**
  * Get data from Todo model
  */
 exports.getGoals = (req, res) => {
-  const todo = new Todo(mongoDB.db);
-  console.log(todo.getGoals());
-  res.render("index");
+  const todo = new Todo();
+  todo
+    .getGoals()
+    .then((goals) => {
+      console.log("Successfully grabbed goals", goals);
+      res.render("index", { data: goals });
+    })
+    .catch((err) => err);
 };
 
 /**
  * Post data to Todo model
  */
-exports.postGoal = async (req, res) => {
+exports.postGoal = (req, res) => {
   const todo = new Todo();
-  const addGoal = await todo.postGoal(req.body);
-  res.redirect("/");
+  todo
+    .postGoal(req.body)
+    .then((result) => {
+      console.log("Successfully posted goal", result);
+      res.redirect("/");
+    })
+    .catch((err) => {
+      console.log(err);
+      res.redirect("/");
+    });
 };
 
 /**

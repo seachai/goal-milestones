@@ -50,11 +50,30 @@
             placeholder="Enter goal here"
           />
         </form>
-        <div class="py-5">
-          <ul>
-            <li>Eat a burrito</li>
-          </ul>
-        </div>
+
+        <table class="table-auto">
+          <thead>
+            <tr>
+              <th class="px-4 py-2">Goal</th>
+              <th class="px-4 py-2">Change It?</th>
+              <th class="px-4 py-2">Done?</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="border px-4 py-2">Intro to CSS</td>
+              <td class="border px-4 py-2">Adam</td>
+              <td class="border px-4 py-2">858</td>
+            </tr>
+            <% data.forEach((post) => { %>
+            <tr>
+              <td class="border px-4 py-2"><%= post.goal %></td>
+              <td class="border px-4 py-2">Edit</td>
+              <td class="border px-4 py-2"><%= post.completed %></td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
       </div>
     </section>
   </body>

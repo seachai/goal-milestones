@@ -1,24 +1,52 @@
+const mongoDB = require("../app.database");
+
 class Todo {
-  constructor(db) {
-    this.collection = db;
+  constructor(data) {
+    this.data = data;
   }
 
   /**
    * Get data from database collection
    */
   getGoals() {
-    const goalCollection = this.collection;
-    return goalCollection;
+    return new Promise((resolve, reject) => {
+      const goals = mongoDB.collection;
+      goals
+        .find({})
+        .toArray()
+        .then((goals) => {
+          if (goals) {
+            resolve(goals);
+          }
+        })
+        .catch((err) => {
+          reject(err);
+        });
+    });
   }
 
   /**
    * Post data to database collection
    */
-  async postGoal(postReq) {
-    await console.log(postReq);
-    // let newGoal = await this.collection.insertOne(postReq);
-    // console.log(`INSERTED ${postReq} into ${this.collection} successfully.`);
-    // return newGoal;
+  postGoal(postReq) {
+    return new Promise((resolve, reject) => {
+      if (postReq) {
+        const goals = mongoDB.collection;
+        goals
+          .insertOne({
+            goal: postReq.goal,
+            completed: false,
+            createdAt: new Date()
+          })
+          .then(() => {
+            console.log(
+              `INSERTED ${postReq} into ${this.collection} successfully.`
+            );
+            resolve();
+          })
+          .catch((err) => reject(err));
+      }
+    });
   }
 
   /**

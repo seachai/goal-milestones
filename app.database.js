@@ -27,7 +27,7 @@ class MongoDB {
     this.collection = this.db.collection("goals");
     // console.log(this.collection);
     // Export the MongoDB client to our model
-    this.Todo = new Todo(this.collection);
+    // this.Todo = new Todo(this.collection);
   }
 }
 
