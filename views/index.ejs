@@ -36,50 +36,86 @@
     </section>
 
     <!-- Form -->
-    <section id="form">
-      <div class="flex justify-between md:py-6 px-4 md:px-0">
+    <section id="form" class="mb-32">
+      <!-- <div class="flex justify-between md:py-6 px-4 md:px-0">
         <h1 class="font-bold border-b border-teal-500 py-2">Add To Goals</h1>
-        <h1 class="font-bold"># Completed Goals</h1>
-      </div>
-      <div class="h-screen">
-        <form action="/post" method="POST">
-          <input
-            type="text"
-            name="goal"
-            class="appearance-none block w-1/3 bg-gray-200 text-gray-700 border rounded py-3 px-6 mb-3 leading-tight focus:outline-none focus:bg-white"
-            placeholder="Enter goal here"
-          />
-        </form>
-
-        <table class="table-auto">
-          <thead>
-            <tr>
-              <th class="px-4 py-2">Goal</th>
-              <th class="px-4 py-2">Change It?</th>
-              <th class="px-4 py-2">Done?</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="border px-4 py-2">Intro to CSS</td>
-              <td class="border px-4 py-2">Adam</td>
-              <td class="border px-4 py-2">858</td>
-            </tr>
-            <% data.forEach((post) => { %>
-            <tr>
-              <td data-id="<%= post._id %>" class="item border px-4 py-2">
-                <%= post.goal %>
-              </td>
-              <td class="border px-4 py-2">
-                <button class="edit-button">Edit</button>
-              </td>
-              <td class="border px-4 py-2"><%= post.completed %></td>
-            </tr>
-            <% }) %>
-          </tbody>
-        </table>
+        <h1 class="font-bold border-b border-teal-500 py-2">
+          # Completed Goals
+        </h1>
+      </div> -->
+      <div class="h-full flex justify-between flex-wrap">
+        <div>
+          <h1 class="font-bold border-b border-teal-500 md:py-6 px-4 md:px-0">
+            Add To Goals
+          </h1>
+          <form action="/post" method="POST">
+            <input
+              type="text"
+              name="goal"
+              class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-6 mb-3 mt-3 leading-tight focus:outline-none focus:bg-white"
+              placeholder="Enter goal here"
+            />
+          </form>
+          <table class="table-auto">
+            <thead>
+              <tr>
+                <th class="px-4 py-2">Goals</th>
+                <th class="px-4 py-2">Change It?</th>
+                <th class="px-4 py-2">Done?</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% data.forEach((post) => { %>
+              <tr>
+                <td data-id="<%= post._id %>" class="item border px-4 py-2">
+                  <%= post.goal %>
+                </td>
+                <td class="border px-4 py-2">
+                  <button class="edit-button">Edit</button>
+                </td>
+                <td class="border px-4 py-2">
+                  <button class="delete-button">Delete</button>
+                </td>
+              </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex flex-col">
+          <h1 class="font-bold border-b border-teal-500 md:py-6 px-4 md:px-0">
+            # Completed Goals
+          </h1>
+          <div class="flex items-end h-full">
+            <table class="table-auto">
+              <thead>
+                <tr>
+                  <th class="px-4 py-2">Goals</th>
+                  <th class="px-4 py-2">Delete?</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% data.forEach((post) => { %>
+                <tr>
+                  <td data-id="<%= post._id %>" class="item border px-4 py-2">
+                    <%= post.goal %>
+                  </td>
+                  <td class="border px-4 py-2">
+                    <button class="delete-button">Delete</button>
+                  </td>
+                </tr>
+                <% }) %>
+              </tbody>
+            </table>
+          </div>
+        </div>
       </div>
     </section>
+
+    <footer class="full-width">
+      <div class="p-24 bg-gray-700 flex justify-center">
+        <p class="text-white">&#169; 2020 Chai Lee</p>
+      </div>
+    </footer>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="/javascripts/client.js"></script>
   </body>

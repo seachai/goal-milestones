@@ -37,12 +37,9 @@ class Todo {
           .insertOne({
             goal: postReq.goal,
             completed: false,
-            createdAt: new Date(),
+            createdAt: new Date()
           })
           .then(() => {
-            console.log(
-              `INSERTED ${postReq} into ${this.collection} successfully.`
-            );
             resolve();
           })
           .catch((err) => reject(err));
@@ -51,22 +48,24 @@ class Todo {
   }
 
   /**
-   * Post data to database collection
+   * Update goal by using ObjectId to reference the goal, then replace it.
    */
   updateGoal(updateReq) {
     return new Promise((resolve, reject) => {
       const goals = mongoDB.collection;
-      goals.findOneAndUpdate(
-        {
-          _id: new ObjectId(updateReq.id),
-        },
-        {
-          $set: { goal: updateReq.goal },
-        },
-        () => {
-          resolve("Successfully updated goal");
-        }
-      );
+      goals
+        .findOneAndUpdate(
+          {
+            _id: new ObjectId(updateReq.id)
+          },
+          {
+            $set: { goal: updateReq.goal }
+          }
+        )
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => reject(err));
     });
   }
 

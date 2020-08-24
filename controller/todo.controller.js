@@ -1,5 +1,4 @@
 const Todo = require("../model/Todo.model");
-// const mongoDB = require("../app.database");
 
 /**
  * Get data from Todo model
@@ -21,8 +20,7 @@ exports.postGoal = (req, res) => {
   const todo = new Todo();
   todo
     .postGoal(req.body)
-    .then((result) => {
-      console.log("Successfully posted goal", result);
+    .then(() => {
       res.redirect("/");
     })
     .catch((err) => {
@@ -32,17 +30,8 @@ exports.postGoal = (req, res) => {
 };
 
 /**
- * Update goal and send to Todo model
+ * Update goal and send update to MongoDB
  */
-
-/*
-Edit and update goal
-When press edit, we will send the ObjectId to the database and find the document that matches the ObjectId
-A prompt will open and prefill the form with the document text
-When you press ok, we will send the updated form to replace the ObjectId in the database
-If you press cancel, nothing will happen since it returns null and no data will change
-
-*/
 exports.updateGoal = async (req, res) => {
   const todo = new Todo();
   todo.updateGoal(req.body);
