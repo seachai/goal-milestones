@@ -1,6 +1,5 @@
 const { MongoClient } = require("mongodb");
 const appConfig = require("./app.config");
-const Todo = require("./model/Todo.model");
 
 /**
  * MongoDB Class Constructor
@@ -9,7 +8,7 @@ class MongoDB {
   constructor() {
     const configOptions = {
       useNewUrlParser: true,
-      useUnifiedTopology: true
+      useUnifiedTopology: true,
     };
     // Create a new instance of MongoClient
     this.client = new MongoClient(appConfig.MONGODB_URI, configOptions);
@@ -32,18 +31,3 @@ class MongoDB {
 }
 
 module.exports = new MongoDB();
-
-// const collection = {};
-// MongoClient.connect(
-//   appConfig.MONGODB_URI,
-//   { useNewUrlParser: true, useUnifiedTopology: true },
-//   (err, client) => {
-//     console.log("Connected to Mongo DB");
-//     // Connect to the database
-//     let db = client.db("goals_app");
-//     // Connect to the collection
-//     collection.goals = db.collection("goals");
-//   }
-// );
-
-// module.exports = collection;

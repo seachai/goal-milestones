@@ -11,6 +11,7 @@ router.get("/", todo.getGoals);
  * Todo
  */
 router.post("/post", todo.postGoal);
+router.post("/update-item", todo.updateGoal);
 router.put("/post", todo.updateGoal);
 router.delete("/post", todo.deleteGoal);
 

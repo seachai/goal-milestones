@@ -1,4 +1,5 @@
 const mongoDB = require("../app.database");
+const ObjectId = require("mongodb").ObjectID;
 
 class Todo {
   constructor(data) {
@@ -36,7 +37,7 @@ class Todo {
           .insertOne({
             goal: postReq.goal,
             completed: false,
-            createdAt: new Date()
+            createdAt: new Date(),
           })
           .then(() => {
             console.log(
@@ -52,8 +53,25 @@ class Todo {
   /**
    * Post data to database collection
    */
-  updateGoal() {
-    console.log("Updated");
+  updateGoal(updateReq) {
+    return new Promise((resolve, reject) => {
+      const goals = mongoDB.collection;
+      goals.findOneAndUpdate(
+        {
+          _id: new ObjectId(updateReq.id),
+        },
+        {
+          $set: { goal: updateReq.goal },
+        },
+        () => {
+          resolve("Successfully updated goal");
+        }
+      );
+    });
+  }
+
+  findGoal() {
+    return new Promise((resolve, reject) => {});
   }
 
   /**

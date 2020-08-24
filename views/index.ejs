@@ -26,7 +26,7 @@
     </header>
     <!-- Hero -->
     <section id="hero">
-      <div class="full-width mb-10" style="height: 50vh">
+      <div class="full-width mb-10" style="height: 50vh;">
         <img
           src="/images/hero.jpg"
           alt="A beautiful dog"
@@ -67,8 +67,12 @@
             </tr>
             <% data.forEach((post) => { %>
             <tr>
-              <td class="border px-4 py-2"><%= post.goal %></td>
-              <td class="border px-4 py-2">Edit</td>
+              <td data-id="<%= post._id %>" class="item border px-4 py-2">
+                <%= post.goal %>
+              </td>
+              <td class="border px-4 py-2">
+                <button class="edit-button">Edit</button>
+              </td>
               <td class="border px-4 py-2"><%= post.completed %></td>
             </tr>
             <% }) %>
@@ -76,5 +80,7 @@
         </table>
       </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="/javascripts/client.js"></script>
   </body>
 </html>
