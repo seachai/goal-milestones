@@ -4,15 +4,15 @@ const ObjectId = require("mongodb").ObjectID;
 class Todo {
   constructor(data) {
     this.data = data;
+    this.goals = mongoDB.collection;
   }
-
   /**
    * Get data from database collection
    */
   getGoals() {
     return new Promise((resolve, reject) => {
-      const goals = mongoDB.collection;
-      goals
+      const completedGoals = mongoDB.completed;
+      this.goals
         .find({})
         .toArray()
         .then((goals) => {
@@ -32,8 +32,7 @@ class Todo {
   postGoal(postReq) {
     return new Promise((resolve, reject) => {
       if (postReq) {
-        const goals = mongoDB.collection;
-        goals
+        this.goals
           .insertOne({
             goal: postReq.goal,
             completed: false,
@@ -52,8 +51,7 @@ class Todo {
    */
   updateGoal(updateReq) {
     return new Promise((resolve, reject) => {
-      const goals = mongoDB.collection;
-      goals
+      this.goals
         .findOneAndUpdate(
           {
             _id: new ObjectId(updateReq.id)
@@ -76,8 +74,17 @@ class Todo {
   /**
    * Delete data from database collection
    */
-  deleteGoal() {
-    console.log("Deleted");
+  deleteGoal(deleteReq) {
+    return new Promise((resolve, reject) => {
+      this.goals
+        .findOneAndDelete({
+          _id: new ObjectId(deleteReq.id)
+        })
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => reject(err));
+    });
   }
 }
 

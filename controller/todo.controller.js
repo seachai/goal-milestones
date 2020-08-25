@@ -43,6 +43,8 @@ exports.updateGoal = async (req, res) => {
  */
 exports.deleteGoal = async (req, res) => {
   const todo = new Todo();
-  todo.deleteGoal();
-  res.redirect("/");
+  // console.log(req.body);
+  todo.deleteGoal(req.body);
+  // res.redirect("/");
+  res.end();
 };

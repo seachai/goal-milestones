@@ -57,7 +57,15 @@ function deleteGoal(e) {
     .getAttribute("data-id");
 
   if (userConfirmation) {
-    console.log(dataId);
+    axios
+      .post("/delete-item", {
+        id: dataId
+      })
+      .then(() => {
+        e.target.parentElement.parentElement.remove();
+      })
+      .catch((err) => console.log(err));
+
     // axios
     //   .delete("/update-item", {
     //     goal: userInput,
