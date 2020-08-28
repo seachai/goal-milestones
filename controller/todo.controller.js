@@ -8,7 +8,12 @@ exports.getGoals = (req, res) => {
   todo
     .getGoals()
     .then((goals) => {
-      res.render("index", { data: goals });
+      const imcompleteGoals = goals.filter((goal) => !goal.completed);
+      const completedGoals = goals.filter((goal) => goal.completed);
+      res.render("index", {
+        goals: imcompleteGoals,
+        completedGoals: completedGoals
+      });
     })
     .catch((err) => err);
 };
@@ -39,12 +44,19 @@ exports.updateGoal = async (req, res) => {
 };
 
 /**
+ * Change complete to true
+ */
+exports.completeGoal = async (req, res) => {
+  const todo = new Todo();
+  todo.completeGoal(req.body);
+  res.redirect("/");
+};
+
+/**
  * Delete goal from Todo model
  */
 exports.deleteGoal = async (req, res) => {
   const todo = new Todo();
-  // console.log(req.body);
   todo.deleteGoal(req.body);
-  // res.redirect("/");
-  res.end();
+  res.redirect("/");
 };

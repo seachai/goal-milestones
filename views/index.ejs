@@ -6,7 +6,6 @@
     <title>Our Goals | Compete to complete</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
   </head>
-  <!-- <body class="bg-gray-100"> -->
   <body
     class="font-sans container m-auto leading-loose tracking-widest font-light sm:font-thin overflow-x-hidden bg-gray-100"
   >
@@ -37,16 +36,10 @@
 
     <!-- Form -->
     <section id="form" class="mb-32">
-      <!-- <div class="flex justify-between md:py-6 px-4 md:px-0">
-        <h1 class="font-bold border-b border-teal-500 py-2">Add To Goals</h1>
-        <h1 class="font-bold border-b border-teal-500 py-2">
-          # Completed Goals
-        </h1>
-      </div> -->
       <div class="h-full flex justify-between flex-wrap">
         <div>
           <h1 class="font-bold border-b border-teal-500 md:py-6 px-4 md:px-0">
-            Add To Goals
+            Add To Goals - Total # of Goals <%= goals.length %>
           </h1>
           <form action="/post" method="POST">
             <input
@@ -61,11 +54,11 @@
               <tr>
                 <th class="px-4 py-2">Goals</th>
                 <th class="px-4 py-2">Change It?</th>
-                <th class="px-4 py-2">Done?</th>
+                <th class="px-4 py-2">Completed?</th>
               </tr>
             </thead>
             <tbody>
-              <% data.forEach((post) => { %>
+              <% goals.forEach((post) => { %>
               <tr>
                 <td data-id="<%= post._id %>" class="item border px-4 py-2">
                   <%= post.goal %>
@@ -74,7 +67,7 @@
                   <button class="edit-button">Edit</button>
                 </td>
                 <td class="border px-4 py-2">
-                  <button class="delete-button">Delete</button>
+                  <button class="complete-button">Submit</button>
                 </td>
               </tr>
               <% }) %>
@@ -83,7 +76,7 @@
         </div>
         <div class="flex flex-col">
           <h1 class="font-bold border-b border-teal-500 md:py-6 px-4 md:px-0">
-            # Completed Goals
+            Total # of Completed Goals: <%= completedGoals.length %>
           </h1>
           <div class="flex items-end h-full">
             <table class="table-auto">
@@ -94,7 +87,7 @@
                 </tr>
               </thead>
               <tbody>
-                <% data.forEach((post) => { %>
+                <% completedGoals.forEach((post) => { %>
                 <tr>
                   <td data-id="<%= post._id %>" class="item border px-4 py-2">
                     <%= post.goal %>

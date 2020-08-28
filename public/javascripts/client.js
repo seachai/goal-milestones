@@ -15,7 +15,10 @@ document.addEventListener("click", (e) => {
       editGoal(e);
       break;
     }
-    // If it contains class delete-button, then delete function
+    case e.target.classList.contains("complete-button"): {
+      completeGoal(e);
+      break;
+    }
     case e.target.classList.contains("delete-button"): {
       deleteGoal(e);
       break;
@@ -50,7 +53,7 @@ function editGoal(e) {
   }
 }
 
-function deleteGoal(e) {
+function completeGoal(e) {
   let userConfirmation = confirm("Finished with this goal?");
   let dataId = e.target.parentElement.parentElement
     .querySelector(".item")
@@ -58,26 +61,30 @@ function deleteGoal(e) {
 
   if (userConfirmation) {
     axios
-      .post("/delete-item", {
+      .post("/complete-goal", {
         id: dataId
       })
       .then(() => {
         e.target.parentElement.parentElement.remove();
       })
       .catch((err) => console.log(err));
+  }
+}
 
-    // axios
-    //   .delete("/update-item", {
-    //     goal: userInput,
-    //     id: e.target.parentElement.parentElement
-    //       .querySelector(".item")
-    //       .getAttribute("data-id")
-    //   })
-    //   .then(() => {
-    //     e.target.parentElement.parentElement.querySelector(
-    //       ".item"
-    //     ).textContent = userInput;
-    //   })
-    //   .catch((err) => console.log(err));
+function deleteGoal(e) {
+  let userConfirmation = confirm("Delete this goal?");
+  let dataId = e.target.parentElement.parentElement
+    .querySelector(".item")
+    .getAttribute("data-id");
+
+  if (userConfirmation) {
+    axios
+      .post("/delete-goal", {
+        id: dataId
+      })
+      .then(() => {
+        e.target.parentElement.parentElement.remove();
+      })
+      .catch((err) => console.log(err));
   }
 }

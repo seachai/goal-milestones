@@ -13,7 +13,8 @@ router.get("/", todo.getGoals);
 router.post("/post", todo.postGoal);
 router.post("/update-item", todo.updateGoal);
 router.put("/post", todo.updateGoal);
-router.post("/delete-item", todo.deleteGoal);
+router.post("/complete-goal", todo.completeGoal);
+router.post("/delete-goal", todo.deleteGoal);
 
 /**
  * User Login

@@ -11,7 +11,6 @@ class Todo {
    */
   getGoals() {
     return new Promise((resolve, reject) => {
-      const completedGoals = mongoDB.completed;
       this.goals
         .find({})
         .toArray()
@@ -20,9 +19,7 @@ class Todo {
             resolve(goals);
           }
         })
-        .catch((err) => {
-          reject(err);
-        });
+        .catch((err) => reject(err));
     });
   }
 
@@ -69,6 +66,27 @@ class Todo {
 
   findGoal() {
     return new Promise((resolve, reject) => {});
+  }
+
+  /**
+   * Change complete to true in the database
+   */
+  completeGoal(completeReq) {
+    return new Promise((resolve, reject) => {
+      this.goals
+        .findOneAndUpdate(
+          {
+            _id: new ObjectId(completeReq.id)
+          },
+          {
+            $set: { completed: true }
+          }
+        )
+        .then(() => {
+          resolve();
+        })
+        .catch((err) => reject(err));
+    });
   }
 
   /**
